@@ -5,6 +5,8 @@ This project builds [Learning With Texts](http://lwt.sf.net) for
 
 ## Usage
 
+`docker pull brianhicks/lwt:latest`
+
 Check `./run.sh`, or start a MySQL container and then link it to the LWT
 container as `mysql`. You'll want to mount external volumes for `/var/lib/mysql`
 on the MySQL container and `/var/www/html/media` on the LWT container, or when
