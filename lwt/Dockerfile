@@ -1,14 +1,15 @@
-FROM php:5-apache
+FROM php:7-apache
 
-RUN apt-get update && apt-get install -y unzip php5-mysql
+RUN apt-get update && apt-get install -y unzip
 
-RUN curl -L http://downloads.sourceforge.net/project/lwt/lwt_v_1_6_1.zip > /tmp/lwt.zip && \
-    cd /var/www/html && \
+RUN mkdir -p /var/www/html/lwt && \
+    curl -L http://sourceforge.net/projects/lwt/files/latest/download >/tmp/lwt.zip && \
+    cd /var/www/html/lwt && \
     unzip /tmp/lwt.zip && \
     rm /tmp/lwt.zip
 
 RUN docker-php-ext-install mysqli
 RUN docker-php-ext-install mbstring
 
-COPY connect.inc.php /var/www/html/
+COPY connect.inc.php /var/www/html/lwt
 COPY php.ini /usr/local/etc/php/
