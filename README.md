@@ -2,43 +2,20 @@
 
 This project builds [Learning With Texts](http://lwt.sf.net) for
 [Docker](https://www.docker.com/). It's based on the image from
-[brianhicks](https://github.com/brianhicks/lwt-docker).
+[brianhicks](https://github.com/brianhicks/lwt-docker), and
+the fork from [phrom](https://github.com/phrom/lwt-docker).
 
 ## Usage
 
-I use the following in docker-compose:
+Running:
 
-```
-  lwt:
-    container_name: "lwt"
-    image: "lwt-docker"
-    restart: "always"
-    environment:
-      MYSQL_PORT_3306_TCP_ADDR: "lwt-mysql"
-      MYSQL_ENV_MYSQL_USER: "lwt"
-      MYSQL_ENV_MYSQL_PASSWORD: "password"
-      MYSQL_ENV_MYSQL_DATABASE: "lwt"
-    volumes:
-      - "/docker/lwt/media:/var/www/html/media"
-    depends_on:
-      - "lwt-mysql"
+    docker-compose up
 
-  lwt-mysql:
-    container_name: "lwt-mysql"
-    image: "mysql:5.7"
-    restart: "always"
-    environment:
-      MYSQL_USER: "lwt"
-      MYSQL_PASSWORD: "password"
-      MYSQL_DATABASE: "lwt"
-      MYSQL_ROOT_PASSWORD: "root-password"
-    user: "1001:1001"
-    volumes:
-      - "/etc/passwd:/etc/passwd:ro"
-      - "/docker/lwt/mysql:/var/lib/mysql"
-```
+Should start MySQL and LWT. By default it should be mapped to port `8000`, so you'll access LWT at <http://localhost:8000/lwt/>.
 
-## Known Issues
+## Notes
 
-- The timezone is hardcoded to mine (America/Sao_Paulo). If this bothers you,
-  feel free to fork.
+- The timezone defaults `America/New_York`. To change it, pass
+  [a valid PHP timezone string](http://php.net/manual/en/timezones.php)
+  as a `timezone` [build arg](https://docs.docker.com/compose/compose-file/#args)
+  in the `lwt` service definition in `docker-compose.yml`.
