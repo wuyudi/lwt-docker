@@ -1,0 +1,30 @@
+version: "2.2"
+services:
+  lwt:
+    container_name: "lwt"
+    build: .
+    restart: "always"
+    environment:
+      MYSQL_PORT_3306_TCP_ADDR: "lwt-mysql"
+      MYSQL_ENV_MYSQL_USER: "lwt"
+      MYSQL_ENV_MYSQL_PASSWORD: "password"
+      MYSQL_ENV_MYSQL_DATABASE: "lwt"
+    volumes:
+      - "lwtmedia:/var/www/html/media"
+    depends_on:
+      - "lwt-mysql"
+    ports:
+      - "8000:80"
+
+  lwt-mysql:
+    container_name: "lwt-mysql"
+    image: "mysql:5.7"
+    restart: "always"
+    environment:
+      MYSQL_USER: "lwt"
+      MYSQL_PASSWORD: "password"
+      MYSQL_DATABASE: "lwt"
+      MYSQL_ROOT_PASSWORD: "root-password"
+
+volumes:
+  lwtmedia:
