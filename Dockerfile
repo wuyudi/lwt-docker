@@ -13,3 +13,6 @@ RUN docker-php-ext-install mbstring
 
 COPY connect.inc.php /var/www/html/lwt
 COPY php.ini /usr/local/etc/php/
+ARG timezone=America/New_York
+RUN echo "date.timezone = ${timezone}" >> /usr/local/etc/php/php.ini
+RUN cat /usr/local/etc/php/php.ini
