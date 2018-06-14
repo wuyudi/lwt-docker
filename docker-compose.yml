@@ -3,7 +3,7 @@ services:
   lwt:
     container_name: "lwt"
     build: .
-    restart: "always"
+    restart: "no"
     environment:
       MYSQL_PORT_3306_TCP_ADDR: "lwt-mysql"
       MYSQL_ENV_MYSQL_USER: "lwt"
@@ -19,7 +19,7 @@ services:
   lwt-mysql:
     container_name: "lwt-mysql"
     image: "mysql:5.7"
-    restart: "always"
+    restart: "no"
     environment:
       MYSQL_USER: "lwt"
       MYSQL_PASSWORD: "password"
