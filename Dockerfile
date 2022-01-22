@@ -1,11 +1,12 @@
-FROM php:7-apache
+FROM php:8-apache
 
-RUN apt-get update && apt-get install -y unzip
-
+RUN apt update && apt install -y unzip libonig5 libonig-dev
+ADD https://nchc.dl.sourceforge.net/project/learning-with-texts/learning_with_texts_2_0_2_complete.zip /tmp/lwt.zip
 RUN mkdir -p /var/www/html/lwt && \
-    curl -L http://sourceforge.net/projects/lwt/files/latest/download >/tmp/lwt.zip && \
     cd /var/www/html/lwt && \
-    unzip /tmp/lwt.zip && \
+    unzip /tmp/lwt.zip -d /tmp/ && \
+    ls &&\
+    unzip /tmp/lwt_*.zip &&\
     rm /tmp/lwt.zip
 
 RUN docker-php-ext-install mysqli
