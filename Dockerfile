@@ -1,4 +1,4 @@
-FROM php:8-apache
+FROM php:7-apache
 
 RUN apt update && apt install -y unzip libonig5 libonig-dev
 ADD https://nchc.dl.sourceforge.net/project/learning-with-texts/learning_with_texts_2_0_2_complete.zip /tmp/lwt.zip
